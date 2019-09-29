@@ -1,0 +1,1388 @@
+{
+	"info": {
+		"_postman_id": "d02b4a02-705a-4f02-89f1-b473f46e48da",
+		"name": "IHRM-人力资源管理系统",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "员工管理",
+			"item": []
+		},
+		{
+			"name": "员工登录",
+			"item": [
+				{
+					"name": "http://182.92.81.159/api/sys/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"\", \r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——登录成功",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d48968f-8ebc-4be1-abaf-777d27120996",
+								"exec": [
+									"",
+									"var token = pm.response.json().data",
+									"pm.globals.set(\"login\",'Bearer '+ token);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"操作成功\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"操作成功\");",
+									"});",
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(10000);",
+									"});",
+									"pm.test(\"Transfer-Encoding is present\", function () {",
+									"    pm.response.to.have.header(\"Transfer-Encoding\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\", \r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——用户名错误",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9120b611-2186-4ed6-9a84-53d790e3d208",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000666\", \r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——密码为空",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "655cad13-df0d-4a68-87cc-1e2e3ac8dc9e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\", \r\n\"password\":\"\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——请求参数为空",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "af321725-2f6e-4038-a883-c3d2008c365b",
+								"exec": [
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求-手机号为10位",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64445272-e76c-427e-a8ac-b89974acabbd",
+								"exec": [
+									"pm.test(\"密码错误\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"1380000000\", \r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求-手机号是13位",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a76d7683-1334-4c92-9162-88284def33c1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"138000000020\", \r\n\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——密码是7位数字",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "69c50241-47e2-4871-9b41-64182bb93d7f",
+								"exec": [
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\", \r\n\"password\":\"1234567\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——密码是6位相同数字数字",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "729a389b-b2f5-4d84-a47e-097b25fa6d75",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\", \r\n\"password\":\"111111\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——密码含特殊字符",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c67711f-3f90-4f72-bef6-6a5daeb3f892",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\", \r\n\"password\":\"123*#4\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST请求——密码为六位中文",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c67711f-3f90-4f72-bef6-6a5daeb3f892",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\", \r\n\"password\":\"今天快放假了\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/login",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "添加员工",
+			"item": [
+				{
+					"name": "POST-添加成功",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fccd9122-2b1b-49a7-bba2-db9a5dfe023c",
+								"exec": [
+									"var em_id = pm.response.json().data.id",
+									"",
+									"pm.globals.set(\"id\",em_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"lpfenl\",\r\n    \"mobile\": \"15712867128\",\r\n    \"timeOfEntry\": \"2029-07-01\",\r\n    \"formOfEmployment\": 1,\r\n    \"workNumber\": \"838136\",\r\n    \"departmentName\": \"开发部\",\r\n    \"departmentId\": \"1066240656586453120\",\r\n    \"correctionTime\": \"2019-11-30\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-姓名为空-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"equals": true,
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"\", \r\n\"mobilePhone\":\"15712894696\",\r\n\"workNumber\":\"1011003\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-手机号位空-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"张名\", \r\n\"mobilePhone\":\"\",\r\n\"workNumber\":\"1011003\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-工号空-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"张名\", \r\n\"mobilePhone\":\"15712894696\",\r\n\"workNumber\":\"\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-姓名为特殊字符-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"张名\", \r\n\"mobilePhone\":\"15712894696\",\r\n\"workNumber\":\"1011003\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-姓名为null-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"null\", \r\n\"mobilePhone\":\"15712894696\",\r\n\"workNumber\":\"1011003\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-手机号10位-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"张名\", \r\n\"mobilePhone\":\"1571289469\",\r\n\"workNumber\":\"1011003\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-工号为中文-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"张名\", \r\n\"mobilePhone\":\"15712894696\",\r\n\"workNumber\":\"我是工号\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-工号为null-添加失败",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fullname\":\"张名\", \r\n\"mobilePhone\":\"15712894696\",\r\n\"workNumber\":\"null\" }"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "查询员工",
+			"item": [
+				{
+					"name": "GET请求——获取员工信息成功",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/{{id}}",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET请求——获取不存在的用户信息",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/1234",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"1234"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET请求——不传递参数",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET请求——传递参数为负数",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/-1177135748583059456",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"-1177135748583059456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET请求——传递参数为非法字符",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/1177135748583059456*",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"1177135748583059456*"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET请求——传递参数为中文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/1177135748583059456",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"1177135748583059456"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "修改员工",
+			"item": [
+				{
+					"name": "PUT-修改成功",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"equals": true,
+								"key": "Authorization",
+								"value": "{{login}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"limimngg\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/{{id}}",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT请求——员工【ID】信息不可修改",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"123\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/{{id}}",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT请求——员工【ID】信息不可修改",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"equals": true,
+								"key": "Authorization",
+								"value": "{{login}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13812345678\"}"
+						},
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/{{id}}",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "删除员工",
+			"item": [
+				{
+					"name": "POST-删除成功",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/{{id}}",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE请求——不存在的ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/123456789",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"123456789"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE请求——不传入ID信息",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE请求——输入非法ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{login}}",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://182.92.81.159/api/sys/user/1177135748583059456///",
+							"protocol": "http",
+							"host": [
+								"182",
+								"92",
+								"81",
+								"159"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"1177135748583059456",
+								"",
+								"",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	]
+}
